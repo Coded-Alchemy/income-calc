@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Taji Abdullah <tajiabdullah1@gmail.com>"]
 edition = "2021"
 build = "build.rs"
+description = "A desktop app that divides up income."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -12,3 +13,7 @@ slint = "1.5"
 
 [build-dependencies]
 slint-build = "1.5"
+
+[package.metadata.bundle]
+name = "Income Divider"
+identifier = "https://github.com/Coded-Alchemy/income-calc"
