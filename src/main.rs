@@ -1,4 +1,7 @@
+mod income_calc;
+
 use slint::SharedString;
+use income_calc::calculations;
 
 slint::include_modules!();
 
@@ -21,10 +24,10 @@ fn main() -> Result<(), slint::PlatformError> {
             let user_input: f64 = user_input.trim().parse().unwrap();
 
             let income_percentage = IncomePercentage {
-                tax: calculate_tax_percentage(user_input),
-                owner: calculate_owner_percentage(user_input),
-                profit: calculate_profit_percentage(user_input),
-                operation_expense: calculate_operation_expense(user_input),
+                tax: calculations::calculate_tax_percentage(user_input),
+                owner: calculations::calculate_owner_percentage(user_input),
+                profit: calculations::calculate_profit_percentage(user_input),
+                operation_expense: calculations::calculate_operation_expense(user_input),
             };
 
             let formated_calculation_result_string =
@@ -39,24 +42,5 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.run()
 }
 
-fn calculate_tax_percentage(input: f64) -> f64 {
-    const TAX_PERCENTAGE: f64 = 0.30;
-    input * TAX_PERCENTAGE
-}
-
-fn calculate_owner_percentage(input: f64) -> f64 {
-    const OWNER_PERCENTAGE: f64 = 0.55;
-    input * OWNER_PERCENTAGE
-}
-
-fn calculate_profit_percentage(input: f64) -> f64 {
-    const PROFIT_PERCENTAGE: f64 = 0.05;
-    input * PROFIT_PERCENTAGE
-}
-
-fn calculate_operation_expense(input: f64) -> f64 {
-    const OPERATION_EXPENSE_PERCENTAGE: f64 = 0.10;
-    input * OPERATION_EXPENSE_PERCENTAGE
-}
 
 
