@@ -1,9 +1,8 @@
-mod income_calc;
+mod domain;
 mod income_percentage;
-mod use_case;
 
 use slint::SharedString;
-use income_calc::use_case;
+use domain::use_case;
 use income_percentage::percent::IncomePercentage;
 
 slint::include_modules!();
@@ -13,11 +12,15 @@ fn main() -> Result<(), slint::PlatformError> {
     let ui = AppWindow::new()?;
 
     ui.on_divide_income({
+
         let ui_handle = ui.as_weak();
+
         move |user_input: SharedString| {
+
             let ui = ui_handle.unwrap();
 
-            if (!user_input.is_empty()) {
+            if !user_input.is_empty() {
+
                 let user_input: f64 = user_input.trim().parse().unwrap();
 
                 let income_percentage = IncomePercentage {
@@ -27,12 +30,12 @@ fn main() -> Result<(), slint::PlatformError> {
                     operation_expense: use_case::calculate_operation_expense(user_input),
                 };
 
-                let formated_calculation_result_string =
-                    format!("Taxes: {:.2}\nOwner: {:.2}\nProfit: {:.2}\nOperating Expense: {:.2}\n",
-                            income_percentage.tax, income_percentage.owner, income_percentage.profit,
-                            income_percentage.operation_expense);
+                let result_string = use_case::format_results(income_percentage.tax,
+                                                           income_percentage.owner,
+                                                           income_percentage.profit,
+                                                           income_percentage.operation_expense);
 
-                ui.set_results(formated_calculation_result_string.into());
+                ui.set_results(result_string.into());
             }
         }
     });
