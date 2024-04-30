@@ -1,6 +1,6 @@
 
-pub(crate) mod percent {
-    pub(crate) struct IncomePercentage {
+pub(crate) mod model {
+    pub(crate) struct CalculationResults {
         pub(crate) tax: f64,
         pub(crate) owner: f64,
         pub(crate) profit: f64,
